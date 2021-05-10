@@ -1,0 +1,5 @@
+Korte reflectie door Mik van der Meer (20110790 MeP2.B)
+
+-Ik vind het systeem een snel werkend en begrijpelijk systeem. Wel zijn er veel opties op welke manier je hem gebruikt. Veel keuze in de gui en ander programma's (Atom).
+-Wat ik geleerd heb is hoe ik git moet gebruiken. Welke opties er allemaal mogelijk zijn en hoe je dus versies moet beheren.
+-Ik had niet perse iets anders gedaan de setup was ontzetten makkelijk door github desktop. Hierna heb ik zelfs nog git geconfigd in atom wat ook heel goed werkte.
