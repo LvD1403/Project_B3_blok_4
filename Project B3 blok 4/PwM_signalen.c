@@ -9,44 +9,41 @@
 #include <avr/interrupt.h>
 #include "h_bridge.h"
 
+
 ISR(TIMER0_OVF_vect)
 {
 	if (OCR0A == 0 && OCR0B == 0)
 	{
-		PORT_RPWM &= ~(1<<PIN_RPWM);
-		PORT_LPWM &= ~(1<<PIN_LPWM);
+		PORTE &= ~(1<<PE4);
+		PORTE &= ~(1<<PE5);
 	}
 	else if (OCR0A != 0)
 	{
-		PORT_LPWM &= ~(1<<PIN_LPWM);
-		PORT_RPWM |= (1<<PIN_RPWM);
+		PORTE &= ~(1<<PE5);
+		PORTE |= (1<<PE4);
 	}
 	else if (OCR0B != 0)
 	{
-		PORT_RPWM &= ~(1<<PIN_RPWM);
-		PORT_LPWM |= (1<<PIN_LPWM);
+		PORTE &= ~(1<<PE4);
+		PORTE |= (1<<PE5);
 	}
 }
 
 ISR(TIMER0_COMPA_vect)
 {
-		PORT_RPWM &= ~(1<<PIN_RPWM);
+		PORTE &= ~(1<<PE4);
 }
 
 ISR(TIMER0_COMPB_vect)
 {
-		PORT_LPWM &= ~(1<<PIN_LPWM);
+		PORTE &= ~(1<<PE5);
 }
 
-void init_h_bridge(void)
+void init_motor(void)
 {
-	// Config pins as output
-	DDR_RPWM |= (1<<PIN_RPWM);
-	DDR_LPWM |= (1<<PIN_LPWM);
-
 	// Output low
-	PORT_RPWM &= ~(1<<PIN_RPWM);
-	PORT_LPWM &= ~(1<<PIN_LPWM);
+	PORTE &= ~(1<<PE4);
+	PORTE &= ~(1<<PE5);
 
 	// Use mode 0, clkdiv = 64
 	TCCR0A = 0;
@@ -64,19 +61,14 @@ void init_h_bridge(void)
 
 void motor (int A, int B))
 {
-	if (percentage >= -100 && percentage <= 100)
-	{
-		if (percentage >= 0)
-		{
-			// Disable LPWM, calculate RPWM
-			OCR0B = 0;
-			OCR0A = (255*percentage)/100;
-		}
-		else // percentage < 0
-		{
-			// Disable RPWM, calculate LPWM
-			OCR0A = 0;
-			OCR0B = (255*percentage)/-100;
-		}
-	}
+	if(A =< 255)
+        {
+            A = 255;
+        }
+	if(B =< 255)
+        {
+            B = 255;
+        }
+	OCR0A = A;
+	OCR0B = B;
 }
