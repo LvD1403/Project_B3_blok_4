@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1621259280 source:c:\users\lennard\desktop\project_b3\project_b3\fuse.c
+	<avr/io.h>
+
+1621259298 source:c:\users\lennard\desktop\project_b3\project_b3\main.c
+	<util/delay.h>
+	<avr/io.h>
+	<avr/interrupt.h>
+
