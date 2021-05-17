@@ -5,6 +5,6 @@ void rechte_lijn (void);
 void Init (void);
 
 //PwM_signalen
-
+motor (int A, int B)
 
 #endif // OVERIGE_FUNCTIE'S_H_INCLUDED
