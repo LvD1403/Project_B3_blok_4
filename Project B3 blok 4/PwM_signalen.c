@@ -30,18 +30,12 @@ ISR(TIMER0_OVF_vect)
 
 ISR(TIMER0_COMPA_vect)
 {
-	if (OCR0A != 255)
-	{
 		PORT_RPWM &= ~(1<<PIN_RPWM);
-	}
 }
 
 ISR(TIMER0_COMPB_vect)
 {
-	if (OCR0B != 255)
-	{
 		PORT_LPWM &= ~(1<<PIN_LPWM);
-	}
 }
 
 void init_h_bridge(void)
@@ -68,7 +62,7 @@ void init_h_bridge(void)
 	sei();
 }
 
-void h_bridge_set_percentage(signed char percentage)
+void motor (int A, int B))
 {
 	if (percentage >= -100 && percentage <= 100)
 	{

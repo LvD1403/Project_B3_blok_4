@@ -1,15 +1,20 @@
 /*
  */
-
+#include <avr/delay.h>
 #include <avr/io.h>
+#include <avr/interrupt.h>
+#include "Header.h"
+
+
+
 
 int main(void)
 {
-
-    // Insert code
-
+ Init();
     while(1)
-    ;
-he;l
+    {
+       rechte_lijn();
+    }
+
     return 0;
 }
