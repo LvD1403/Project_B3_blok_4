@@ -6,6 +6,7 @@
 #include "Header.h"
 
 
+
 int main(void)
 {
     init();
@@ -13,7 +14,9 @@ int main(void)
     while(1)
     {
         rechte_lijn();
+		bocht_links();
+		rechte_lijn();
+        bocht_rechts();
     }
-
     return 0;
 }

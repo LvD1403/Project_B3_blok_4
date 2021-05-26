@@ -1,8 +1,11 @@
 #ifndef HEADER_H_INCLUDED
 #define HEADER_H_INCLUDED
+float ultrasoon;
 
 //overige functie's
 void rechte_lijn (void);
+void bocht_links (void);
+void bocht_rechts (void);
 void init (void);
 
 //PwM_signalen
