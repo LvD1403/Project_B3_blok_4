@@ -2,8 +2,7 @@
 1621259280 source:c:\users\lennard\desktop\project_b3\project_b3\fuse.c
 	<avr/io.h>
 
-1622035939 source:c:\users\lennard\desktop\project_b3\project_b3\main.c
-	<util/delay.h>
+1622193098 source:c:\users\lennard\desktop\project_b3\project_b3\main.c
 	<avr/io.h>
 	<avr/interrupt.h>
 	"Header.h"
@@ -14,7 +13,7 @@
 	<avr/interrupt.h>
 	"Header.h"
 
-1622036221 c:\users\lennard\desktop\project_b3\project_b3\header.h
+1622193012 c:\users\lennard\desktop\project_b3\project_b3\header.h
 
 1622036243 source:c:\users\lennard\desktop\project_b3\project_b3\pwm_signalen.c
 	<util/delay.h>

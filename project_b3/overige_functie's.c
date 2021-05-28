@@ -17,63 +17,86 @@ void init (void)
 
 void rechte_lijn(void)
 {
-    while (ultrasoon <= 37)
+	int vlag;
+	TCNT1 = 0;
+	Grote_klok = 0;
+    while ((ultrasoon <= 37) && (vlag == 1))
     {
-        motor(122,122);
+        motor(170,170);
         if (PINA &(1 << PA0))
         {
-            for (int a = 120;PINA &(1 << PA0); a++)
+            for (int a = 170;PINA &(1 << PA0); a++)
             {
-                motor (a,100);
-                _delay_ms(20);
+                motor (a,160);
+                _delay_ms(40);
             }
         }
         if (PINA &(1 << PA1))
         {
-            for (int a = 120;(PINA &(1 << PA1)); a++)
+            for (int a = 170;(PINA &(1 << PA1)); a++)
             {
-                motor (a,100);
-                _delay_ms(20);
+                motor (a,160);
+                _delay_ms(40);
             }
         }
+		if (Grote_klok >= 180)//stel de boog begint te laat dan kun je de waarde veranderen nu 18.0 seconden
+		{
+			vlag = 1;
+		}
+		if ((ultrasoon <= 37) && (vlag != 1))
+		{
+			motor(0,0);
+		}
     }
 }
 
 void bocht_links (void)
 {
-	    while (ultrasoon <= 19) //rij door totdat we op +/-
-    {
-        motor(20,20);
-        if (PINA &(1 << PA0))
-        {
-            for (int a = 20;PINA &(1 << PA0); a++)
-            {
-                motor (a,15);
-                _delay_ms(20);
-            }
-        }
-        if (PINA &(1 << PA1))
-        {
-            for (int a = 20;(PINA &(1 << PA1)); a++)
-            {
-                motor (a,15);
-                _delay_ms(20);
-            }
-        }
-    }
-	while (PINA &(1 << PA0))
+	int vlag;
+	TCNT1 = 0;
+	Grote_klok = 0;
+	while ((PINA &(1 << PA0)) && (vlag == 1))
 	{
-		motor(10,20); //bocht naar links maken
-	}
-	if(ultrasoon <= 24)
-	{
-	}
+		//motor(,); //bocht naar links maken
+		if ((PINA &(1 << PA0)) && (Grote_klok <=)) //waarde
+		{
+			error();
+		}
+		//if (Grote_klok >= 180)
+		//{
 
+		//}
+	}
 }
 
 void bocht_rechts (void)
 {
+	int vlag;
+	TCNT1 = 0;
+	Grote_klok = 0;
+	while ((PINA &(1 << PA0)) && (vlag == 1))
+	{
+		//motor(,); //bocht naar rechts maken
+		if ((PINA &(1 << PA0)) && (Grote_klok <=)) //waarde
+		{
+			error();
+		}
+		//if (Grote_klok >= 180)
+		//{
 
+		//}
+		if ((ultrasoon <= 37) && (vlag != 1))
+		{
+			motor(0,0);
+		}
+	}
+}
 
-
+void error (void) //om een probleem optelossen todat we een betere oplossing hebben of niet
+{
+	while (1)
+	{
+	motor(0,0);
+	//error lampje knipperen?
+	}
 }

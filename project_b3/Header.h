@@ -1,6 +1,7 @@
 #ifndef HEADER_H_INCLUDED
 #define HEADER_H_INCLUDED
 float ultrasoon;
+int Grote_klok;
 
 //overige functie's
 void rechte_lijn (void);
