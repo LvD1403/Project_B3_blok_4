@@ -5,8 +5,7 @@
 uint16_t waarde1;
 uint16_t waarde2;
 uint32_t counts;
-uint16_t IR_links;
-uint16_t IR_rechts;
+int ultasoon_nr;
 
 ISR(TIMER1_COMPA_vect)
 {
@@ -26,13 +25,24 @@ ISR (TIMER4_CAPT_vect)
         TCCR4B |= 0; // geen interrupts meer
         waarde2 = TCNT4; // Save current count
         counts = (uint32_t)waarde1 - (uint32_t)waarde2;
+		if (ultasoon_nr = 3)
+		{
         ultrasoon = (counts/2)*0.01715; //snelheid van geluid keer de tijd die de klok vertegenwoordigd (16/8 = 2 1/2E6= 5E-7)
+		}
+		if (ultasoon_nr = 1)
+		{
+        ultrasoon_links = (counts/2)*0.01715; //snelheid van geluid keer de tijd die de klok vertegenwoordigd (16/8 = 2 1/2E6= 5E-7)
+		}
+		if (ultasoon_nr = 1)
+		{
+        ultrasoon_rechts = (counts/2)*0.01715; //snelheid van geluid keer de tijd die de klok vertegenwoordigd (16/8 = 2 1/2E6= 5E-7)
+		}
     }
 }
 
 ISR(TIMER4_COMPA_vect)
 {
-    PORTA &= ~(1<<PA3);
+    PORTA = 0;
     TIMSK4 = (1 << ICIE4);
     TCCR4B |= (1 << ICES4);
 }
@@ -43,38 +53,25 @@ ISR(TIMER2_OVF_vect)
     PORTA |= (1<<PA3);
     TCNT4 =0;
     OCR4A = 20000;
+	ultasoon_nr = 3;
 }
 
 ISR(TIMER2_COMPA_vect)
 {
-    if (ADCSRA & (1 << 4))
-    {
-        IR_links= ADC; //waarde ir links wordt upgedate
-        if (ADC > 0)
-        {
-            motor(0,0);
-            //lampje kniperen
-            //delay
-        }
-    }
-    ADMUX |= 0;//zie dia's week 7 micro 2 of datasheet 282
-    ADCSRA |= (ADSC); //start convertion
+    TIMSK4 = (1<<OCIE4A);
+    PORTA |= (1<<PA2);
+    TCNT4 =0;
+    OCR4A = 20000;
+	ultasoon_nr = 2;
 }
 
 ISR(TIMER2_COMPB_vect)
 {
-    if(ADCSRA & (1 << 4))
-    {
-        IR_links= ADC; //waarde ir links wordt upgedate
-        if (ADC > 0)
-        {
-            motor(0,0);
-            //lampje kniperen
-            //delay
-        }
-    }
-    ADMUX |= 0;//zie dia's week 7 micro 2 of datasheet 282
-    ADCSRA |= (ADSC); //start convertion
+    TIMSK4 = (1<<OCIE4A);
+    PORTA |= (1<<PA1);
+    TCNT4 =0;
+    OCR4A = 20000;
+	ultasoon_nr = 1;
 }
 
 ISR(TIMER0_OVF_vect)
@@ -125,7 +122,7 @@ void init_motor (void)
     TIMSK1 = (1<<OCIE0A);
     OCR1A = 6250; //0.1 van een seconde dus kan gebruikt worden om een grote klok te maken voor 25.5 seconden
 
-    // Use mode 0, clkdiv = 128   klok 2 globale trigger
+    // Use mode 0, clkdiv = 1024   klok 2 globale trigger
     TCCR2A = 0;
     TCCR2B = (1<<CS22) | (0<<CS21) | (1<<CS20);
     OCR2A = 85;
@@ -136,13 +133,9 @@ void init_motor (void)
     TCCR4A = 0;
     TCCR4B = (0<<CS42) | (1<<CS41) | (0<<CS40);
 
-    // intialisatie ADC goed controleren vrij nieuw
-    ADMUX =(0 << REFS1)|(0 << REFS0); //meet vanaf 0 volt
-           ADCSRA = (1 << ADPS2)|(1 << ADPS1)|(1 << ADPS0);//Division factor van 128
-                     ADCSRA |=(1 << ADEN); // ADC activeren
 
-                               // Interupts geactiveerd
-                               sei();
+    // Interupts geactiveerd
+    sei();
 }
 
 void motor (signed int Af, signed int Bf)

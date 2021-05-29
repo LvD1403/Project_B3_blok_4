@@ -1,6 +1,8 @@
 #ifndef HEADER_H_INCLUDED
 #define HEADER_H_INCLUDED
 float ultrasoon;
+float ultrasoon_links;
+float ultrasoon_rechts;
 int Grote_klok;
 
 //overige functie's
