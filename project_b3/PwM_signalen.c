@@ -25,15 +25,15 @@ ISR (TIMER4_CAPT_vect)
         TCCR4B |= 0; // geen interrupts meer
         waarde2 = TCNT4; // Save current count
         counts = (uint32_t)waarde1 - (uint32_t)waarde2;
-		if (ultasoon_nr = 3)
+		if ((ultasoon_nr = 3))
 		{
         ultrasoon = (counts/2)*0.01715; //snelheid van geluid keer de tijd die de klok vertegenwoordigd (16/8 = 2 1/2E6= 5E-7)
 		}
-		if (ultasoon_nr = 1)
+		if ((ultasoon_nr = 2))
 		{
         ultrasoon_links = (counts/2)*0.01715; //snelheid van geluid keer de tijd die de klok vertegenwoordigd (16/8 = 2 1/2E6= 5E-7)
 		}
-		if (ultasoon_nr = 1)
+		if ((ultasoon_nr = 1))
 		{
         ultrasoon_rechts = (counts/2)*0.01715; //snelheid van geluid keer de tijd die de klok vertegenwoordigd (16/8 = 2 1/2E6= 5E-7)
 		}
