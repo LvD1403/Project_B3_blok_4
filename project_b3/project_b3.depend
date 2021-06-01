@@ -21,7 +21,7 @@
 	<avr/interrupt.h>
 	"Header.h"
 
-1622302290 source:c:\users\jeroe\onedrive\desktop\project_b3_blok_4\project_b3\main.c
+1622556595 source:c:\users\jeroe\onedrive\desktop\project_b3_blok_4\project_b3\main.c
 	<util/delay.h>
 	<avr/io.h>
 	<avr/interrupt.h>
@@ -32,13 +32,13 @@
 1621259732 source:c:\users\jeroe\onedrive\desktop\project_b3_blok_4\project_b3\fuse.c
 	<avr/io.h>
 
-1622302290 source:c:\users\jeroe\onedrive\desktop\project_b3_blok_4\project_b3\pwm_signalen.c
+1622553380 source:c:\users\jeroe\onedrive\desktop\project_b3_blok_4\project_b3\pwm_signalen.c
 	<util/delay.h>
 	<avr/io.h>
 	<avr/interrupt.h>
 	"Header.h"
 
-1622302461 source:c:\users\jeroe\onedrive\desktop\project_b3_blok_4\project_b3\overige_functie's.c
+1622556925 source:c:\users\jeroe\onedrive\desktop\project_b3_blok_4\project_b3\overige_functie's.c
 	<util/delay.h>
 	<avr/io.h>
 	<avr/interrupt.h>

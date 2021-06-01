@@ -42,7 +42,7 @@ ISR (TIMER4_CAPT_vect)
 
 ISR(TIMER4_COMPA_vect)
 {
-    PORTA = 0;
+    PORTC = 0;
     TIMSK4 = (1 << ICIE4);
     TCCR4B |= (1 << ICES4);
 }
@@ -50,16 +50,16 @@ ISR(TIMER4_COMPA_vect)
 ISR(TIMER2_OVF_vect)
 {
     TIMSK4 = (1<<OCIE4A);
-    PORTA |= (1<<PA3);
+    PORTA |= (1<<PC5);
     TCNT4 =0;
     OCR4A = 20000;
-	ultasoon_nr = 3;
+	ultasoon_nr = 3; //VOOR
 }
 
 ISR(TIMER2_COMPA_vect)
 {
     TIMSK4 = (1<<OCIE4A);
-    PORTA |= (1<<PA2);
+    PORTA |= (1<<PC6); //LINKS
     TCNT4 =0;
     OCR4A = 20000;
 	ultasoon_nr = 2;
@@ -68,7 +68,7 @@ ISR(TIMER2_COMPA_vect)
 ISR(TIMER2_COMPB_vect)
 {
     TIMSK4 = (1<<OCIE4A);
-    PORTA |= (1<<PA1);
+    PORTA |= (1<<PC5); //RECHTS
     TCNT4 =0;
     OCR4A = 20000;
 	ultasoon_nr = 1;
@@ -79,17 +79,15 @@ ISR(TIMER0_OVF_vect)
     if (OCR0A == 0 && OCR0B == 0)
     {
         PORTE &= ~(1<<PE4);
-        PORTE &= ~(1<<PE5);
+        PORTE &= ~(1<<PE3);
     }
-    else if (OCR0A != 0)
+    if (OCR0A != 0)
     {
-        PORTE &= ~(1<<PE5);
         PORTE |= (1<<PE4);
     }
-    else if (OCR0B != 0)
+    if (OCR0B != 0)
     {
-        PORTE &= ~(1<<PE4);
-        PORTE |= (1<<PE5);
+        PORTE |= (1<<PE3);
     }
 }
 
@@ -100,14 +98,14 @@ ISR(TIMER0_COMPA_vect)
 
 ISR(TIMER0_COMPB_vect)
 {
-    PORTE &= ~(1<<PE5);
+    PORTE &= ~(1<<PE3);
 }
 
 void init_motor (void)
 {
     // Output low
     PORTE &= ~(1<<PE4);
-    PORTE &= ~(1<<PE5);
+    PORTE &= ~(1<<PE3);
 
     // Use mode 0, clkdiv = 64 klok 0 Pwm signalen
     TCCR0A = 0;
