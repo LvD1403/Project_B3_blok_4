@@ -23,7 +23,7 @@ void rechte_lijn(void)
 	Grote_klok = 0;
     while ((ultrasoon <= 37) && (vlag == 1))
     {
-		if ((ultrasoon_rechts > 10) && (ultrasoon_links > 10))
+		if (((ultrasoon_rechts > 10) && (ultrasoon_rechts < 37)) || ((ultrasoon_links > 10) && (ultrasoon_links < 37)))
 		{
         motor(170,170);
         if (PINA &(1 << PA0))
