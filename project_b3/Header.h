@@ -13,7 +13,7 @@ void init (void);
 void error (void);
 
 //PwM_signalen
-void motor (signed int Af, signed int Bf);
+void motor (int Af, int Bf);
 void init_motor (void);
 
 #endif // HEADER_H_INCLUDED

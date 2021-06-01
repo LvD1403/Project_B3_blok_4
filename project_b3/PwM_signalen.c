@@ -76,9 +76,12 @@ ISR(TIMER2_COMPB_vect)
 
 ISR(TIMER0_OVF_vect)
 {
-    if (OCR0A == 0 && OCR0B == 0)
+    if (OCR0A == 0)
     {
         PORTE &= ~(1<<PE4);
+    }
+    if (OCR0B == 0)
+    {
         PORTE &= ~(1<<PE3);
     }
     if (OCR0A != 0)
@@ -115,7 +118,7 @@ void init_motor (void)
     OCR0B = 0;
 
     // Use mode 0, clkdiv = 256 klok 1 globale klok
-    TCCR1A = 0;
+   /* TCCR1A = 0;
     TCCR1B = (1<<CS02) | (0<<CS01) | (0<<CS00);
     TIMSK1 = (1<<OCIE0A);
     OCR1A = 6250; //0.1 van een seconde dus kan gebruikt worden om een grote klok te maken voor 25.5 seconden
@@ -132,30 +135,13 @@ void init_motor (void)
     TCCR4B = (0<<CS42) | (1<<CS41) | (0<<CS40);
 
 
-    // Interupts geactiveerd
+    // Interupts geactiveerd*/
     sei();
 }
 
-void motor (signed int Af, signed int Bf)
+void motor (int Af, int Bf)
 {
-    if(Af < 0)
-    {
-        PORTJ |= (1<<PJ0);
-        OCR0A = Af;
-    }
-    if (Bf < 0)
-    {
-        PORTJ |= (1<<PJ1);
-        OCR0B = Bf;
-    }
-    if (Af > 0)
-    {
-        PORTJ &= ~(1<<PJ0);
-        OCR0A = Af;
-    }
-    if (Bf > 0)
-    {
-        PORTJ &= ~(1<<PJ1);
-        OCR0B = Bf;
-    }
+
+            OCR0A = Af;
+            OCR0B = Bf;
 }

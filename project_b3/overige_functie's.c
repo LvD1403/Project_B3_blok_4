@@ -10,8 +10,8 @@ void init (void)
 	DDRH |= (1 << PH4);     //lampje
 	DDRE |= (1 << PJ1);     //motorrichting links
 	DDRE |= (1 << PJ0);     //motorrichting rechts
-    DDRA &= ~(1 << PA0);    //Nadering links
-    DDRA &= ~(1 << PA1);    //Nadering rechts
+    DDRA &= ~(1 << PD0);    //Nadering links
+    DDRA &= ~(1 << PD1);    //Nadering rechts
 	DDRL &= ~(1 << PL0);    //Ultrasoon echopin
 	DDRA |= (1 << PA3);     //Ultrasoon trigger
 	DDRC |= (1<<PC7);       //Ultrasoon rechts 30
@@ -28,18 +28,18 @@ void rechte_lijn(void)
    // {
 	//	if (((ultrasoon_rechts > 10) && (ultrasoon_rechts < 37)) || ((ultrasoon_links > 10) && (ultrasoon_links < 37)))
 		//{
-        if ((!(PINA & (1 << PA0))) && (!(PINA & (1 << PA1))))
-        {
-                motor(170,170);
-        }
+        //if ((!(PINA & (1 << PA0))) && (!(PINA & (1 << PA1))))
+        //{
+        //        motor(170,170);
+        //}
         if (PINA &(1 << PA0))
         {
-                motor (170,0);
+                motor (170,160);
                // _delay_ms(40);
         }
         if (PINA &(1 << PA1))
         {
-                motor (170,0);
+                motor (160,170);
                 //_delay_ms(40);
         }
 
