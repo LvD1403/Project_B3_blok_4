@@ -13,6 +13,7 @@ int main(void)
     init_motor();
     while(1)
     {
+
         rechte_lijn();
         bocht_links();
         rechte_lijn();
