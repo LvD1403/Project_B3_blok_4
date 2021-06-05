@@ -5,7 +5,6 @@
 uint16_t waarde1;
 uint16_t waarde2;
 uint32_t counts;
-int ultasoon_nr;
 
 ISR(TIMER1_COMPA_vect)
 {
@@ -15,8 +14,6 @@ ISR(TIMER1_COMPA_vect)
 
 ISR (TIMER4_CAPT_vect)
 {
-    if (TCNT4 >= 20000);
-    {
     if (TCCR4B & (1<<ICES4)) // On rising edge
     {
         TCCR4B &= ~(1<<ICES4); // Next time detect falling edge
@@ -27,27 +24,12 @@ ISR (TIMER4_CAPT_vect)
         TCCR4B |= 0; // geen interrupts meer
         waarde2 = TCNT4; // Save current count
         counts = (uint32_t)waarde2 - (uint32_t)waarde1;
-		if ((ultasoon_nr = 3))
-		{
         ultrasoon = (counts/2)*0.01715; //snelheid van geluid keer de tijd die de klok vertegenwoordigd (16/8 = 2 1/2E6= 5E-7)
-		}
-		if ((ultasoon_nr = 2))
-		{
-        ultrasoon_links = (counts/2)*0.01715; //snelheid van geluid keer de tijd die de klok vertegenwoordigd (16/8 = 2 1/2E6= 5E-7)
-		}
-		if ((ultasoon_nr = 1))
-		{
-        ultrasoon_rechts = (counts/2)*0.01715; //snelheid van geluid keer de tijd die de klok vertegenwoordigd (16/8 = 2 1/2E6= 5E-7)
-		}
     }
-}
 }
 
 ISR(TIMER4_COMPA_vect)
 {
-    PORTC &= ~(1<<PC5);
-    PORTC &= ~(1<<PC6);
-    PORTC &= ~(1<<PC7);
     TIMSK4 = (1 << ICIE4);
     TCCR4B |= (1 << ICES4);
 }
@@ -57,23 +39,26 @@ ISR(TIMER2_OVF_vect)
     PORTC |= (1<<PC5);
     TCNT4 =0;
     OCR4A = 20000;
-	ultasoon_nr = 3; //VOOR
 }
 
 ISR(TIMER2_COMPA_vect)
 {
-    PORTC |= (1<<PC6); //LINKS
-    TCNT4 =0;
-    OCR4A = 20000;
-	ultasoon_nr = 2;
+    if (ADCSRA & (1 << ADSC))
+    {
+        Ir_links= ADC; //waarde ir links wordt upgedate
+    }
+    ADMUX |= (6);// Analoog 6 wissel naar
+    ADCSRA |= (1<<ADSC); //start convertion
 }
 
 ISR(TIMER2_COMPB_vect)
 {
-    PORTC |= (1<<PC7); //RECHTS
-    TCNT4 =0;
-    OCR4A = 20000;
-	ultasoon_nr = 1;
+    if(ADCSRA & (1 << ADSC))
+    {
+        Ir_rechts= ADC; //waarde ir links wordt upgedate
+    }
+    ADMUX |= (7);//analoog 7 wissel naar
+    ADCSRA |= (1<<ADSC); //start convertion
 }
 
 ISR(TIMER0_OVF_vect)
@@ -137,13 +122,18 @@ void init_motor (void)
     TCCR4B = (0<<CS42) | (1<<CS41) | (0<<CS40);
     TIMSK4 = (1<<OCIE4A);
 
+// intialisatie ADC goed controleren vrij nieuw
+    ADMUX =(0 << REFS1)|(1 << REFS0); //meet vanaf 0 volt
+    ADCSRA = (1 << ADPS2)|(1 << ADPS1)|(1 << ADPS0);//Division factor van 128
+    ADCSRA |=(1 << ADEN); // ADC activeren
+
     // Interupts geactiveerd*/
     sei();
 }
 
 void motor (int Af, int Bf)
 {
-            PORTJ |= (1 << PJ0);
+            PORTJ |= (1 << PJ0); //corigeren voor een aansluitfout
             OCR0A = Af;
             OCR0B = Bf;
 }

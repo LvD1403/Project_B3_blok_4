@@ -13,11 +13,13 @@ int main(void)
     init_motor();
     while(1)
     {
-
-        rechte_lijn();
+        rechte_lijnlinks();
         bocht_links();
-        rechte_lijn();
+		rechte_lijnbeide();
         bocht_rechts();
+		rechte_lijnbeide();
+		bocht_links();
+		rechte_lijnrechts();
     }
     return 0;
 }

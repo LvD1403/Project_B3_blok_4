@@ -90,3 +90,26 @@
 	<avr/interrupt.h>
 	"Header.h"
 
+1622571528 source:c:\users\lennard\desktop\project_b3_blok_4\project_b3\fuse.c
+	<avr/io.h>
+
+1622923614 source:c:\users\lennard\desktop\project_b3_blok_4\project_b3\main.c
+	<util/delay.h>
+	<avr/io.h>
+	<avr/interrupt.h>
+	"Header.h"
+
+1622923614 c:\users\lennard\desktop\project_b3_blok_4\project_b3\header.h
+
+1622660237 source:c:\users\lennard\desktop\project_b3_blok_4\project_b3\overige_functie's.c
+	<util/delay.h>
+	<avr/io.h>
+	<avr/interrupt.h>
+	"Header.h"
+
+1622923614 source:c:\users\lennard\desktop\project_b3_blok_4\project_b3\pwm_signalen.c
+	<util/delay.h>
+	<avr/io.h>
+	<avr/interrupt.h>
+	"Header.h"
+
