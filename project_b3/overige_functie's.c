@@ -13,7 +13,7 @@ void init (void)
     DDRA &= ~(1 << PD0);    //Nadering links 21
     DDRA &= ~(1 << PD1);    //Nadering rechts 20
 	DDRL &= ~(1 << PL0);    //Ultrasoon echopin 49
-	DDRC |=  (1 << PC5);       //Ultrasoon voor 32
+	DDRC |=  (1 << PC5);    //Ultrasoon voor 32
 	DDRF &= ~(1 << PF7);    //Ir sensor Analoog 7 links
 	DDRF &= ~(1 << PF6);    //Ir sensor Analoog 6 rechts
 }

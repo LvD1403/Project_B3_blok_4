@@ -67,3 +67,26 @@
 	<avr/interrupt.h>
 	"Header.h"
 
+1622923767 source:c:\users\lennard\desktop\project_b3_blok_4\project b3 agv navigatie\fuse.c
+	<avr/io.h>
+
+1624024779 source:c:\users\lennard\desktop\project_b3_blok_4\project b3 agv navigatie\main.c
+	<util/delay.h>
+	<avr/io.h>
+	<avr/interrupt.h>
+	"Header.h"
+
+1622923767 c:\users\lennard\desktop\project_b3_blok_4\project b3 agv navigatie\header.h
+
+1624026178 source:c:\users\lennard\desktop\project_b3_blok_4\project b3 agv navigatie\overige_functie's.c
+	<util/delay.h>
+	<avr/io.h>
+	<avr/interrupt.h>
+	"Header.h"
+
+1624026423 source:c:\users\lennard\desktop\project_b3_blok_4\project b3 agv navigatie\pwm_signalen.c
+	<util/delay.h>
+	<avr/io.h>
+	<avr/interrupt.h>
+	"Header.h"
+

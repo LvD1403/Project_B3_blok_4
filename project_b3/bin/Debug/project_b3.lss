@@ -243,7 +243,7 @@ void init (void)
      1ca:	80 81       	ld	r24, Z
      1cc:	8e 7f       	andi	r24, 0xFE	; 254
      1ce:	8c 93       	st	X, r24
-	DDRC |=  (1 << PC5);       //Ultrasoon voor 32
+	DDRC |=  (1 << PC5);    //Ultrasoon voor 32
      1d0:	a7 e2       	ldi	r26, 0x27	; 39
      1d2:	b0 e0       	ldi	r27, 0x00	; 0
      1d4:	e7 e2       	ldi	r30, 0x27	; 39
