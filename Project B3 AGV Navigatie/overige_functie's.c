@@ -18,7 +18,7 @@ void init (void)
 void rechte_lijn(void)
 {
     //PORTF &= ~(1 << PF0);
-    int vlag;
+    int vlag = 0;
     TCNT1 = 0;
     Grote_klok = 0;
     while (vlag)
