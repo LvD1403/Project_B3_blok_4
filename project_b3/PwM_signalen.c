@@ -30,7 +30,9 @@ ISR (TIMER4_CAPT_vect)
 
 ISR(TIMER4_COMPA_vect)
 {
-    TIMSK4 = (1 << ICIE4);
+    PORTC &= ~(1 << PC5);
+
+    TIMSK4 |= (1 << ICIE4);
     TCCR4B |= (1 << ICES4);
 }
 
@@ -38,7 +40,7 @@ ISR(TIMER2_OVF_vect)
 {
     PORTC |= (1<<PC5);
     TCNT4 =0;
-    OCR4A = 20000;
+    OCR4A = 20;
 }
 
 ISR(TIMER2_COMPA_vect)
@@ -120,7 +122,7 @@ void init_motor (void)
     //Use mode 0, clkdiv = 8 klok 4 ultrasoon
     TCCR4A = 0;
     TCCR4B = (0<<CS42) | (1<<CS41) | (0<<CS40);
-    TIMSK4 = (1<<OCIE4A);
+    TIMSK4 |= (1<<OCIE4A);
 
 // intialisatie ADC goed controleren vrij nieuw
     ADMUX =(0 << REFS1)|(1 << REFS0); //meet vanaf 0 volt

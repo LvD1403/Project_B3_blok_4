@@ -57,12 +57,6 @@ void rechte_lijnlinks(void)
             {
                 vlag = 0;
             }
-            //if ((vlag != 1)) //&&(ultrasoon <= 20) medewerker correctie
-            //{
-            //	int waarde = Grote_klok;
-            //	motor(0,0);
-            //	Grote_klok = Grote_klok - waarde;
-            //}
         }
         else
         {
@@ -95,7 +89,7 @@ void rechte_lijnbeide(void)
             }
             Grote_klok = waarde6;
         }
-        if ((Ir_links < 265) && (Ir_rechts < 265)) //boomdectectie
+        if (((Ir_links < 265) && (Ir_rechts < 265)) || ultrasoon > 20) //boomdectectie
         {
             if ((!(PINA & (1 << PA0))) && (!(PINA & (1 << PA1))))
             {
@@ -115,12 +109,6 @@ void rechte_lijnbeide(void)
             {
                 vlag = 0;
             }
-            //if ((vlag != 1)) //&&(ultrasoon <= 20) medewerker correctie
-            //{
-            //	int waarde = Grote_klok;
-            //	motor(0,0);
-            //	Grote_klok = Grote_klok - waarde;
-            //}
         }
         else
         {

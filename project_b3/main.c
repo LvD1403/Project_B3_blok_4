@@ -11,6 +11,6 @@ int main(void)
 {
     init();
     init_motor();
-    rechte_lijnlinks();
+    rechte_lijnbeide();
     return 0;
 }

@@ -6,7 +6,7 @@ uint16_t Ir_rechts;
 int Grote_klok;
 
 //overige functie's
-void rechte_lijn (void);
+void rechte_lijnbeide (void);
 void rechte_lijnlinks (void);
 void rechte_lijnrechts (void);
 void bocht_links (void);
