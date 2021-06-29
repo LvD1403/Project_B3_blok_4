@@ -11,6 +11,12 @@ int main(void)
 {
     init();
     init_motor();
-    rechte_lijnbeide();
+   // rechte_lijnlinks();
+    bocht_links();
+   // rechte_lijnbeide();
+   // bocht_rechts();
+   // rechte_lijnbeide();
+   // bocht_links();
+   // rechte_lijnrechts();
     return 0;
 }

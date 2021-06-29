@@ -20,6 +20,70 @@ void init (void)
 
 }
 
+void rechte_lijnrechts(void)
+{
+    int vlag = 1;
+    TCNT1 = 0;
+    Grote_klok = 0;
+    while (vlag) //(ultrasoon <= 37)
+    {
+        if  (!(PINF && (1 << PF0)))
+        {
+            motor(0,0);
+            int waarde6 = Grote_klok;
+            _delay_ms(20);
+            Grote_klok = waarde6;
+        }
+        else
+        {
+            if (ultrasoon > 20)
+            {
+                if (((Ir_links < 265))) //boomdectectie
+                {
+                    if ((!(PINA & (1 << PA0))) && (!(PINA & (1 << PA1))))
+                    {
+                        motor(170,170);
+                    }
+                    if (PINA &(1 << PA0))
+                    {
+                        motor (170,0);
+                        _delay_ms(40);
+                    }
+                    if (PINA &(1 << PA1))
+                    {
+                        motor (0,170);
+                        _delay_ms(40);
+                    }
+                    if (Grote_klok >= 180)//stel de boog begint te laat dan kun je de waarde veranderen nu 18.0 seconden
+                    {
+                        vlag = 0;
+                    }
+                }
+                else
+                {
+                    int waarde = Grote_klok;
+                    motor (0,0);
+                    PORTH |=  (1 << PH4);
+                    _delay_ms(500);
+                    PORTH &= ~(1 << PH4);
+                    Grote_klok = waarde;
+                    motor(170,170);
+                    _delay_ms(100);
+                }
+            }
+            else
+            {
+                int waarde = Grote_klok;
+                motor (0,0);
+                PORTH |=  (1 << PH4);
+                _delay_ms(500);
+                PORTH &= ~(1 << PH4);
+                Grote_klok = waarde;
+            }
+        }
+    }
+}
+
 void rechte_lijnlinks(void)
 {
     int vlag = 1;
@@ -27,47 +91,60 @@ void rechte_lijnlinks(void)
     Grote_klok = 0;
     while (vlag) //(ultrasoon <= 37)
     {
-        if  (PINF && (1 << PF0))
+        if  (!(PINF && (1 << PF0)))
         {
             motor(0,0);
             int waarde6 = Grote_klok;
-            while (PINF && (1 << PF0))
-            {
-                _delay_ms(2);
-            }
+            _delay_ms(20);
             Grote_klok = waarde6;
-        }
-        if ((Ir_links < 265)) //boomdectectie
-        {
-            if ((!(PINA & (1 << PA0))) && (!(PINA & (1 << PA1))))
-            {
-                motor(170,170);
-            }
-            if (PINA &(1 << PA0))
-            {
-                motor (170,0);
-                _delay_ms(40);
-            }
-            if (PINA &(1 << PA1))
-            {
-                motor (0,170);
-                _delay_ms(40);
-            }
-            if (Grote_klok >= 180)//stel de boog begint te laat dan kun je de waarde veranderen nu 18.0 seconden
-            {
-                vlag = 0;
-            }
         }
         else
         {
-            int waarde = Grote_klok;
-            motor (0,0);
-            PORTH |=  (1 << PH4);
-            _delay_ms(500);
-            PORTH &= ~(1 << PH4);
-            Grote_klok = waarde;
+            if (ultrasoon > 20)
+            {
+                if (((Ir_rechts < 265))) //boomdectectie
+                {
+                    if ((!(PINA & (1 << PA0))) && (!(PINA & (1 << PA1))))
+                    {
+                        motor(170,170);
+                    }
+                    if (PINA &(1 << PA0))
+                    {
+                        motor (170,0);
+                        _delay_ms(40);
+                    }
+                    if (PINA &(1 << PA1))
+                    {
+                        motor (0,170);
+                        _delay_ms(40);
+                    }
+                    if (Grote_klok >= 180)//stel de boog begint te laat dan kun je de waarde veranderen nu 18.0 seconden
+                    {
+                        vlag = 0;
+                    }
+                }
+                else
+                {
+                    int waarde = Grote_klok;
+                    motor (0,0);
+                    PORTH |=  (1 << PH4);
+                    _delay_ms(500);
+                    PORTH &= ~(1 << PH4);
+                    Grote_klok = waarde;
+                    motor(170,170);
+                    _delay_ms(100);
+                }
+            }
+            else
+            {
+                int waarde = Grote_klok;
+                motor (0,0);
+                PORTH |=  (1 << PH4);
+                _delay_ms(500);
+                PORTH &= ~(1 << PH4);
+                Grote_klok = waarde;
+            }
         }
-
     }
 }
 
@@ -79,70 +156,85 @@ void rechte_lijnbeide(void)
     Grote_klok = 0;
     while (vlag) //(ultrasoon <= 37)
     {
-        if  (PINF && (1 << PF0))
+        if  (!(PINF && (1 << PF0)))
         {
             motor(0,0);
             int waarde6 = Grote_klok;
-            while (PINF && (1 << PF0))
-            {
-                _delay_ms(2);
-            }
+            _delay_ms(20);
             Grote_klok = waarde6;
-        }
-        if (((Ir_links < 265) && (Ir_rechts < 265)) || ultrasoon > 20) //boomdectectie
-        {
-            if ((!(PINA & (1 << PA0))) && (!(PINA & (1 << PA1))))
-            {
-                motor(170,170);
-            }
-            if (PINA &(1 << PA0))
-            {
-                motor (170,0);
-                _delay_ms(40);
-            }
-            if (PINA &(1 << PA1))
-            {
-                motor (0,170);
-                _delay_ms(40);
-            }
-            if (Grote_klok >= 180)//stel de boog begint te laat dan kun je de waarde veranderen nu 18.0 seconden
-            {
-                vlag = 0;
-            }
         }
         else
         {
-            int waarde = Grote_klok;
-            motor (0,0);
-            PORTH |=  (1 << PH4);
-            _delay_ms(500);
-            PORTH &= ~(1 << PH4);
-            Grote_klok = waarde;
+            if (ultrasoon > 20)
+            {
+                if (((Ir_links < 265) && (Ir_rechts < 265))) //boomdectectie
+                {
+                    if ((!(PINA & (1 << PA0))) && (!(PINA & (1 << PA1))))
+                    {
+                        motor(170,170);
+                    }
+                    if (PINA &(1 << PA0))
+                    {
+                        motor (170,0);
+                        _delay_ms(40);
+                    }
+                    if (PINA &(1 << PA1))
+                    {
+                        motor (0,170);
+                        _delay_ms(40);
+                    }
+                    if (Grote_klok >= 180)//stel de boog begint te laat dan kun je de waarde veranderen nu 18.0 seconden
+                    {
+                        vlag = 0;
+                    }
+                }
+                else
+                {
+                    int waarde = Grote_klok;
+                    motor (0,0);
+                    PORTH |=  (1 << PH4);
+                    _delay_ms(500);
+                    PORTH &= ~(1 << PH4);
+                    Grote_klok = waarde;
+                    motor(170,170);
+                    _delay_ms(100);
+                }
+            }
+            else
+            {
+                int waarde = Grote_klok;
+                motor (0,0);
+                PORTH |=  (1 << PH4);
+                _delay_ms(500);
+                PORTH &= ~(1 << PH4);
+                Grote_klok = waarde;
+            }
         }
-
     }
 }
 
-void bocht_links (void)
-{
-    int vlag;
-    TCNT1 = 0;
-    Grote_klok = 0;
-    while ((vlag == 1))// && (PINA &(1 << PA0))
+    void bocht_links (void)
     {
-        motor(35,170); //bocht naar rechts maken
-        if ((PINA &(1 << PA0)) && (Grote_klok <= 11.3)) //waarde
+        int vlag;
+        TCNT1 = 0;
+        Grote_klok = 0;
+        while ((vlag == 1))// && (PINA &(1 << PA0))
         {
-            error();
-        }
-        if (Grote_klok >= 11.3)
-        {
-            vlag = 1;
+            motor(35,170); //bocht naar rechts maken
+            if ((PINA &(1 << PA0)) && (Grote_klok <= 11.3)) //waarde
+            {
+                error();
+            }
+            if (Grote_klok >= 11.3)
+            {
+                vlag = 1;
+            }
+
         }
 
     }
 
-}
+
 
 void bocht_rechts (void)
 {

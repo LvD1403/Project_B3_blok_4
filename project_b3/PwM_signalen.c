@@ -5,6 +5,7 @@
 uint16_t waarde1;
 uint16_t waarde2;
 uint32_t counts;
+int geweest;
 
 ISR(TIMER1_COMPA_vect)
 {
@@ -18,9 +19,15 @@ ISR (TIMER4_CAPT_vect)
     {
         TCCR4B &= ~(1<<ICES4); // Next time detect falling edge
         waarde1 = TCNT4; // Save current count
+        if (geweest == 0)
+        {
+            ultrasoon = 23;
+        }
+        geweest = 0;
     }
     else // On falling edge
     {
+        geweest = 1;
         TCCR4B |= 0; // geen interrupts meer
         waarde2 = TCNT4; // Save current count
         counts = (uint32_t)waarde2 - (uint32_t)waarde1;
@@ -128,6 +135,9 @@ void init_motor (void)
     ADMUX =(0 << REFS1)|(1 << REFS0); //meet vanaf 0 volt
     ADCSRA = (1 << ADPS2)|(1 << ADPS1)|(1 << ADPS0);//Division factor van 128
     ADCSRA |=(1 << ADEN); // ADC activeren
+
+    //ultrasoon correctie
+    ultrasoon = 23; //
 
     // Interupts geactiveerd*/
     sei();

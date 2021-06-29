@@ -93,7 +93,7 @@
 1622571528 source:c:\users\lennard\desktop\project_b3_blok_4\project_b3\fuse.c
 	<avr/io.h>
 
-1624538920 source:c:\users\lennard\desktop\project_b3_blok_4\project_b3\main.c
+1624885826 source:c:\users\lennard\desktop\project_b3_blok_4\project_b3\main.c
 	<util/delay.h>
 	<avr/io.h>
 	<avr/interrupt.h>
@@ -101,13 +101,13 @@
 
 1624538936 c:\users\lennard\desktop\project_b3_blok_4\project_b3\header.h
 
-1624538920 source:c:\users\lennard\desktop\project_b3_blok_4\project_b3\overige_functie's.c
+1624885900 source:c:\users\lennard\desktop\project_b3_blok_4\project_b3\overige_functie's.c
 	<util/delay.h>
 	<avr/io.h>
 	<avr/interrupt.h>
 	"Header.h"
 
-1624538755 source:c:\users\lennard\desktop\project_b3_blok_4\project_b3\pwm_signalen.c
+1624884304 source:c:\users\lennard\desktop\project_b3_blok_4\project_b3\pwm_signalen.c
 	<util/delay.h>
 	<avr/io.h>
 	<avr/interrupt.h>
